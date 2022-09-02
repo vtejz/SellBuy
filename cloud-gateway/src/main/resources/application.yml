@@ -1,0 +1,41 @@
+server:
+  port: 9191
+spring:
+  application:
+    name: Api-Gateway
+  cloud:
+    gateway:
+      routes:
+        - id: UserService
+          uri: lb://UserService
+          predicates:
+            - Path=/user/**
+        - id: AuthenticationService
+          uri: lb://AuthenticationService
+          predicates:
+            - Path=/auth/**
+        - id: favouriteService
+          uri: lb://favouriteService
+          predicates:
+              - Path=/api/v1/**
+        - id: orderHistoryService
+          uri: lb://orderHistoryService
+          predicates:
+              - Path=/api/v1/**
+        - id: ProductService
+          uri: lb://ProductService
+          predicates:
+              - Path=/products/**
+
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: https://serviceregister-1-tejashwinivmurthy-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/eureka/
+
+
+
+
